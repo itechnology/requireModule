@@ -1,0 +1,12 @@
+Make loader module
+
+Make something like require.js
+    require([somemodule, someothermodule]);
+
+Make modules extensible
+    check out define()
+
+
+http://addyosmani.com/writing-modular-js/
+http://api.jquery.com/category/deferred-object/
+https://github.com/addyosmani/jquery-plugin-patterns
