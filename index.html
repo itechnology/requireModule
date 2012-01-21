@@ -60,7 +60,7 @@
         <button onclick="runModule('.dependency-test')">runModule('.dependency-test')</button>
 
         <pre>
-        function loadModule(name) {
+        function loadModule(name, ele) {
             jQuery.requireModule(name)
                 .done(function(){
                     $(arguments).each(function() {
