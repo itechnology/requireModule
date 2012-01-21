@@ -10,13 +10,14 @@
             margin: 50px auto;
             width : 720px;
         }
-        .require-test {
+        .require-test, .dependency-test {
             font-size: 12px;
             color: red;
         }
     </style>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="src/jQuery.requireModule.js"></script>
+    <script src="src/jQuery.registerModule.js"></script>
 </head>
 <body>
     <h1>jQuery.requireModule()</h1>
@@ -25,27 +26,86 @@
     <h5>Simple Test</h5>
     <div>
         <div class="require-test"></div>
+
+        <button onclick="loadModule(['module1','module1','module2'], '.require-test')">loadModule(['module1','module1','module2'])</button>
+
         <pre>
-        jQuery.requireModule(['module1','module1','module2','module3'])
-                .done(function(module){
-                    $(".require-test").append("&lt;div&gt;" + module + " loaded&lt;/div&gt;");
+        function loadModule(name) {
+            jQuery.requireModule(name)
+                .done(function(){
+                    $(arguments).each(function() {
+                        $(ele).append("&lt;div>" + this + " loaded&lt;/div>");
+                    });
                 })
-                .fail(function(module) {
-                    $(".require-test").append("&lt;div&gt;" + module + " failed&lt;/div&gt;");
+                .fail(function() {
+                    $(arguments).each(function() {
+                        $(ele).append("&lt;div>" + this + " failed&lt;/div>");
+                    });
                 });
+        }
+        </pre>
+    </div>
+
+
+    <h5>Test with module/dependency loading</h5>
+    <div>
+        <div class="dependency-test"></div>
+
+        <button onclick="loadModule('my.module', '.dependency-test')">loadModule('my.module', '.dependency-test')</button><br />
+        <button onclick="runModule('.dependency-test')">runModule('.dependency-test')</button>
+
+        <br /><br />
+
+        <button onclick="loadModule('your.module', '.dependency-test')">loadModule('your.module', '.dependency-test')</button><br />
+        <button onclick="runModule('.dependency-test')">runModule('.dependency-test')</button>
+
+        <pre>
+        function loadModule(name) {
+            jQuery.requireModule(name)
+                .done(function(){
+                    $(arguments).each(function() {
+                        $(ele).append("&lt;div>" + this + " loaded&lt;/div>");
+                    });
+                })
+                .fail(function() {
+                    $(arguments).each(function() {
+                        $(ele).append("&lt;div>" + this + " failed&lt;/div>");
+                    });
+                });
+        }
+        function runModule(ele) {
+            try {
+                $(ele).append("&lt;div>" + myNameSpace.test.utilities.doStuff() + "&lt;/div>");
+            } catch (e) {
+                $(ele).append("&lt;div>" + e + "&lt;/div>");
+            }
+        }
         </pre>
     </div>
 
     <a href="https://github.com/itechnology/requireModule">Source on Github</a>
 
     <script>
-        jQuery.requireModule(['module1','module1','module2','module3'])
-                .done(function(module){
-                    $(".require-test").append("<div>" + module + " loaded</div>");
+        function loadModule(name, ele) {
+            jQuery.requireModule(name)
+                .done(function(){
+                    $(arguments).each(function() {
+                        $(ele).append("<div>" + this + " loaded</div>");
+                    });
                 })
-                .fail(function(module) {
-                    $(".require-test").append("<div>" + module + " failed</div>");
+                .fail(function() {
+                    $(arguments).each(function() {
+                        $(ele).append("<div>" + this + " failed</div>");
+                    });
                 });
+        }
+        function runModule(ele) {
+            try {
+                $(ele).append("<div>" + myNameSpace.test.utilities.doStuff() + "</div>");
+            } catch (e) {
+                $(ele).append("<div>" + e + "</div>");
+            }
+        }
     </script>
 </body>
 </html>

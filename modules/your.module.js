@@ -1,13 +1,25 @@
-(function($, window, undefined){
-    var namespace = "imm.utilities";
-
+;(function($, window, undefined){
+    // Module is declared here as a plain object, name of the module does not matter here
     var module = {
+      // Now just start adding a bunch of functions
       doStuff: function() {
-          console.log("doing something else");
+          return "doing something else";
       }
     };
 
-    // TODO: need some way of deciding if we should overwrite an existing object or return a new object
-    // preferably the decision should be made on the defer() side, not here
-    window.imm.registerModule(namespace, module);
+
+
+
+    // Must declare some basic info about the module here, so we can make decisions later
+    var moduleInfo = {
+        nameSpace: "test.utilities",
+        version  : 1.1,
+        module   : module,
+
+        // If you like, add extra stuff here, like a init function to call on load...
+        init: function(){ alert("whoops"); }
+    };
+
+    // This is executed once the module is loaded
+    $(window.document).triggerHandler({ type: "module:loaded", moduleInfo: moduleInfo });
 })(jQuery, window);
