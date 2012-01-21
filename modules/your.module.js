@@ -1,4 +1,4 @@
-;(function($, window, undefined){
+;(function($, w, undefined){
     // Module is declared here as a plain object, name of the module does not matter here
     var module = {
       // Now just start adding a bunch of functions
@@ -6,8 +6,6 @@
           return "doing something else";
       }
     };
-
-
 
 
     // Must declare some basic info about the module here, so we can make decisions later
@@ -21,5 +19,5 @@
     };
 
     // This is executed once the module is loaded
-    $(window.document).triggerHandler({ type: "module:loaded", moduleInfo: moduleInfo });
+    $(w.document).triggerHandler({ type: "module:loaded", moduleInfo: moduleInfo });
 })(jQuery, window);

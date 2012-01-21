@@ -9,7 +9,7 @@
  * Date    : 15/01/12
  * Version : 0.1
  **************************/
-;(function($) {
+;(function($, undefined) {
     $.loadedModules = [];
     $.requireModule = function(module, options) {
         var opt = {

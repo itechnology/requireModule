@@ -1,6 +1,6 @@
-;(function(jQuery, windo, undefined) {
+;(function($, w, undefined) {
     // This can be considered as your base class
-    window.myNameSpace = {
+    w.myNameSpace = {
         // This function is taken from YUI
         // http://yuilibrary.com/yui/docs/api/classes/YUI.html#method_namespace
         // It creates a namespace, given a string
@@ -40,7 +40,7 @@
         }
     };
 
-    jQuery(window.document).on("module:loaded", function(e) { myNameSpace.registerModule(e.moduleInfo); });
+    $(w.document).on("module:loaded", function(e) { myNameSpace.registerModule(e.moduleInfo); });
 })(jQuery, window);
 
 
